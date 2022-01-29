@@ -326,7 +326,7 @@ func (options Options) Accept() (MediaType, error) {
 
 // Find return's range of type options. First number is index and second number is index of next option type.
 func (options Options) Find(ID OptionID) (int, int, error) {
-	idxPre, idxPost := options.findPositon(ID)
+	idxPre, idxPost := options.findPosition(ID)
 	if idxPre == -1 && idxPost == 0 {
 		return -1, -1, ErrOptionNotFound
 	}
@@ -343,8 +343,8 @@ func (options Options) Find(ID OptionID) (int, int, error) {
 	return idxPre, idxPost, nil
 }
 
-// findPositon returns opened interval, -1 at means minIdx insert at 0, -1 maxIdx at maxIdx means append.
-func (options Options) findPositon(ID OptionID) (minIdx int, maxIdx int) {
+// findPosition returns opened interval, -1 at means minIdx insert at 0, -1 maxIdx at maxIdx means append.
+func (options Options) findPosition(ID OptionID) (minIdx int, maxIdx int) {
 	if len(options) == 0 {
 		return -1, 0
 	}
@@ -376,7 +376,7 @@ func (options Options) findPositon(ID OptionID) (minIdx int, maxIdx int) {
 //
 // Return's modified options.
 func (options Options) Set(opt Option) Options {
-	idxPre, idxPost := options.findPositon(opt.ID)
+	idxPre, idxPost := options.findPosition(opt.ID)
 	if idxPre == -1 && idxPost == -1 {
 		//append
 		options = append(options[:0], opt)
@@ -433,7 +433,7 @@ func (options Options) Set(opt Option) Options {
 
 // Add append's option to options.
 func (options Options) Add(opt Option) Options {
-	_, idxPost := options.findPositon(opt.ID)
+	_, idxPost := options.findPosition(opt.ID)
 	if idxPost == -1 {
 		idxPost = len(options)
 	}
