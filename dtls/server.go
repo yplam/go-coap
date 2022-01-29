@@ -152,7 +152,9 @@ func NewServer(opt ...ServerOption) *Server {
 
 	ctx, cancel := context.WithCancel(opts.ctx)
 	if opts.errors == nil {
-		opts.errors = func(error) {}
+		opts.errors = func(error) {
+			// default no-op
+		}
 	}
 
 	if opts.getMID == nil {

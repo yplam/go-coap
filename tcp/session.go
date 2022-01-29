@@ -81,7 +81,9 @@ func NewSession(
 ) *Session {
 	ctx, cancel := context.WithCancel(ctx)
 	if errors == nil {
-		errors = func(error) {}
+		errors = func(error) {
+			// default no-op
+		}
 	}
 	if inactivityMonitor == nil {
 		inactivityMonitor = inactivity.NewNilMonitor()
